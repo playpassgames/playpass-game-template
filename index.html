@@ -9,10 +9,14 @@
 <body>
 
   <header>
-    <div id="helpBtn"></div>
-    <h1>🎲 Daily Dice</h1>
-    <div id="statsBtn"></div>
-    <div id="settingsBtn"></div>
+    <div class="header-buttons-left">
+      <div id="helpBtn"></div>
+    </div>
+    <h2>🎲 Daily Dice</h2>
+    <div class="header-buttons-right">
+      <div id="statsBtn"></div>
+      <div id="settingsBtn"></div>
+    </div>
   </header>
 
   <div class="screen" id="playingScreen">
@@ -34,6 +38,8 @@
     <p>This is an example of how to use the Playpass SDK to build a simple daily level game.</p>
     <p>Each day, you have the opportunity to roll a set of 3 dice. If you get a good roll, share it with a friend!</p>
     <button id="helpBackBtn">Continue</button>
+
+    <a class="fork-ribbon" href="https://github.com/playpassgames/playpass-game-template" target="_blank">Fork with Playpass</a>
   </div>
 
   <div class="screen" id="statsScreen">
@@ -53,10 +59,6 @@
       <button id="logoutBtn">Logout</button>
     </div>
     <button id="settingsBackBtn">Back</button>
-  </div>
-
-  <div class="branding">
-    <a href="https://github.com/playpassgames/playpass-game-template" target="_blank">Fork this Playpass template</a>
   </div>
 
 </body>
