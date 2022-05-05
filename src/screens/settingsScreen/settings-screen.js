@@ -1,5 +1,5 @@
-import { Screen, showScreen } from "../../boilerplate/screens";
-import state from "../../state";
+import { Screen, showScreen } from "@/boilerplate/screens";
+import state from "@/state";
 
 const template = `
 <h2>Settings</h2>

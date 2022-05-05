@@ -1,6 +1,7 @@
 import * as playpass from "playpass";
-import { Screen, showScreen } from "../../boilerplate/screens";
-import state from "../../state";
+import { Screen, showScreen } from "@/boilerplate/screens";
+import * as timer from "@/boilerplate/timer";
+import state from "@/state";
 
 const DICE_EMOJI = [ "⚀", "⚁", "⚂", "⚃", "⚄", "⚅" ];
 
@@ -65,6 +66,18 @@ window.customElements.define(
                 rank = "CURSED!";
             }
             this.querySelector("#resultLine2").textContent = rank;
+
+            const nextGameAt = timer.getNextGameTime();
+            this.timerUpdate = setInterval(() => {
+                const until = timer.getUntil(nextGameAt);
+                this.querySelector("#timeLeft").textContent = `${until.hours}h ${until.minutes}m ${until.seconds}s until next roll`;
+            }, 1000);
+        }
+
+        onInactive() {
+            if (this.timerUpdate) {
+                clearInterval(this.timerUpdate);
+            }
         }
     },
 );

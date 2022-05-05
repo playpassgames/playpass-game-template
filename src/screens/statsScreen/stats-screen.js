@@ -1,4 +1,4 @@
-import { Screen, showScreen } from "../../boilerplate/screens";
+import { Screen, showScreen } from "@/boilerplate/screens";
 
 const template = `
 <h2>Stats</h2>

@@ -42,14 +42,6 @@ function onSettingsClick () {
         document.body.classList.add("isLoggedIn");
     }
 
-    var nextGameAt = timer.getNextGameTime();
-    setInterval(() => {
-        var hoursLeft = timer.getHoursUntil(nextGameAt);
-        var minutesLeft = timer.getMinutesUntil(nextGameAt);
-        var secondsLeft = timer.getSecondsUntil(nextGameAt);
-        document.querySelector("#timeLeft").textContent = hoursLeft + "h " + minutesLeft + "m " + secondsLeft + "s" + " until next roll";
-    }, 1000);
-
     // Add UI event listeners
     document.querySelector("game-header .button[name=help]").onclick = onHelpClick;
     document.querySelector("game-header .button[name=stats]").onclick = onStatsClick;

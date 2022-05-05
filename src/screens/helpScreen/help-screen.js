@@ -1,5 +1,5 @@
 import * as playpass from "playpass";
-import { Screen, showScreen } from "../../boilerplate/screens";
+import { Screen, showScreen } from "@/boilerplate/screens";
 
 const template = `
 <h2>Welcome to Daily Dice!</h2>

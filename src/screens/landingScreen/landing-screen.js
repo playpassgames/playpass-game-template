@@ -1,6 +1,6 @@
 import * as playpass from "playpass";
-import { Screen, showScreen } from "../../boilerplate/screens";
-import state from "../../state";
+import { Screen, showScreen } from "@/boilerplate/screens";
+import state from "@/state";
 
 const template = `
 <p>Test your luck with three dice. How high can you roll?</p>
