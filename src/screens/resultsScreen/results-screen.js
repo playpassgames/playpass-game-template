@@ -1,7 +1,7 @@
 import * as playpass from "playpass";
-import { showScreen } from "@/boilerplate/screens";
-import * as timer from "@/boilerplate/timer";
-import state from "@/state";
+import { showScreen } from "../../boilerplate/screens";
+import * as timer from "../../boilerplate/timer";
+import state from "../../state";
 
 const DICE_EMOJI = [ "⚀", "⚁", "⚂", "⚃", "⚄", "⚅" ];
 

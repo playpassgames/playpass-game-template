@@ -1,5 +1,5 @@
 import * as playpass from "playpass";
-import { showScreen } from "@/boilerplate/screens";
+import { showScreen } from "../../boilerplate/screens";
 
 function back() {
     showScreen("#game-screen");

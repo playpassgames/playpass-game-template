@@ -1,5 +1,5 @@
-import { showScreen } from "@/boilerplate/screens";
-import state from "@/state";
+import { showScreen } from "../../boilerplate/screens";
+import state from "../../state";
 
 async function login () {
     await state.login();

@@ -1,6 +1,6 @@
 import * as playpass from "playpass";
-import { asyncHandler, showScreen } from "@/boilerplate/screens";
-import state from "@/state";
+import { asyncHandler, showScreen } from "../../boilerplate/screens";
+import state from "../../state";
 
 async function roll() {
     await state.rollDice();
