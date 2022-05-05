@@ -18,4 +18,3 @@ export function getSecondsUntil (date) {
     var now = new Date().getTime();
     return Math.floor(((date - now) % (1000 * 60)) / 1000);
 }
-    

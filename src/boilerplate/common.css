@@ -2,6 +2,12 @@
 
 body {
   margin-top: 0;
+  display: flex;
+  width: 100vw;
+  max-width: 940px;
+  min-height: 100vh;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 body.isLoggedIn .showIfLoggedOut {
@@ -21,36 +27,9 @@ button:hover {
     background: #20a5d1;
 }
 
-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 60px;
-    border-bottom: 1px solid var(--text-muted);
-}
-
-header h2 {
+article {
+    display: block;
     flex: 1;
-    text-align: center;
-    margin-top: 0.5em;
-}
-
-.header-buttons-left, .header-buttons-right {
-    display: flex;
-    width: 100px;
-    gap: 0.5em;
-}
-
-.header-buttons-left {
-    justify-content: flex-start;
-}
-
-.header-buttons-right {
-    justify-content: flex-end;
-}
-
-.screen {
-    text-align: center;
-    display: none;
 }
 
 .fork-ribbon {
