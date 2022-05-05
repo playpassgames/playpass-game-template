@@ -43,25 +43,25 @@ window.customElements.define(
                 const prev = this.querySelector(oldValue);
                 if (prev) {
                     prev.removeAttribute("active");
-                    if (typeof prev.onInactive == 'function') {
-                        prev.onInactive();
-                    }
+                    prev.dispatchEvent(new CustomEvent("inactive"));
                 }
                 
                 const next = this.querySelector(newValue);
                 next.setAttribute("active", "");
 
-                this.setAttribute("loading", "");
-                next.setAttribute("loading", "");
-                if (typeof next.onActive == 'function') {
-                    await next.onActive();
-                }
-                this.removeAttribute("loading");
-                next.removeAttribute("loading");
+                next.dispatchEvent(new CustomEvent("active"));
             }
         }
     }
 );
+
+export function asyncHandler(fn){
+    return async (e) => {
+        document.querySelector(routerTagName).setAttribute("loading", "");
+        await fn(e);
+        document.querySelector(routerTagName).removeAttribute("loading");
+    };
+}
 
 export function showScreen(name) {
     document.querySelector(routerTagName).setAttribute("open", name);

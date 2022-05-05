@@ -8,6 +8,6 @@ function back() {
 const template = document.querySelector("#help-screen");
 
 template.querySelector("button[name=back]").onclick = back;
-template.onActive = () => {
+template.addEventListener("active", () => {
     playpass.storage.set("sawTutorial", true);
-}
+});

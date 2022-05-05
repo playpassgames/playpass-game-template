@@ -20,7 +20,7 @@ let timerUpdate;
 const template = document.querySelector("#results-screen");
 
 template.querySelector("button[name=share]").onclick = share;
-template.onActive = async () => {
+template.addEventListener("active", () => {
     if (state.rolledDice.length === 0) {
         showScreen("#game-screen");
         return;
@@ -58,10 +58,10 @@ template.onActive = async () => {
         const until = timer.getUntil(nextGameAt);
         template.querySelector("#timeLeft").textContent = `${until.hours}h ${until.minutes}m ${until.seconds}s until next roll`;
     }, 1000);
-}
+});
 
-template.onInactive = () => {
+template.addEventListener("inactive", () => {
     if (timerUpdate) {
         clearInterval(timerUpdate);
     }
-};
+});
