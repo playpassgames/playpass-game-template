@@ -5,26 +5,25 @@ import "./boilerplate/header.js";
 import "./main.css";
 
 import "./boilerplate/screens";
-import "./screens/landingScreen/landing-screen";
+import "./screens/gameScreen/game-screen";
 import "./screens/resultsScreen/results-screen";
 import "./screens/helpScreen/help-screen";
 import "./screens/statsScreen/stats-screen";
 import "./screens/settingsScreen/settings-screen";
 
-import * as timer from "./boilerplate/timer";
 import { showScreen } from "./boilerplate/screens";
 import state from "./state";
 
 function onHelpClick () {
-    showScreen("help-screen");
+    showScreen("#help-screen");
 }
 
 function onStatsClick () {
-    showScreen("stats-screen");
+    showScreen("#stats-screen");
 }
 
 function onSettingsClick () {
-    showScreen("settings-screen");
+    showScreen("#settings-screen");
 }
 
 (async function () {
@@ -35,7 +34,7 @@ function onSettingsClick () {
 
     await state.init();
 
-    showScreen("landing-screen");
+    showScreen("#game-screen");
 
     // Set the login state for our UI
     if (playpass.account.isLoggedIn()) {

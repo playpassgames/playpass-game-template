@@ -27,11 +27,6 @@ button:hover {
     background: #20a5d1;
 }
 
-article {
-    display: block;
-    flex: 1;
-}
-
 .fork-ribbon {
     position: fixed;
     bottom: 55px;

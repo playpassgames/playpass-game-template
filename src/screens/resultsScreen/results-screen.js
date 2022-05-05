@@ -1,83 +1,67 @@
 import * as playpass from "playpass";
-import { Screen, showScreen } from "@/boilerplate/screens";
+import { showScreen } from "@/boilerplate/screens";
 import * as timer from "@/boilerplate/timer";
 import state from "@/state";
 
 const DICE_EMOJI = [ "⚀", "⚁", "⚂", "⚃", "⚄", "⚅" ];
 
-const template = `
-<p>Your dice rolls today were...</p>
-<h1 id="resultLine1">⚅ + ⚅ + ⚅ = 18 points</h1>
-<h2 id="resultLine2">Lucky!</h2>
-<button name="share">🗨️ Share</button>
-<p><span id="timeLeft"></span></p>
-`
+function share() {
+    // Create a link to our game
+    const link = playpass.createLink();
 
-window.customElements.define(
-    "results-screen", 
-    class extends Screen {
-        constructor() {
-            super();
+    // Share some text along with our link
+    playpass.share({
+        text: `Today's dice ${state.rolledDice.map(roll => DICE_EMOJI[roll]).join(" ")} ${link}`,
+    });
+}
 
-            this.innerHTML = template;
+let timerUpdate;
 
-            this.querySelector("button[name=share]").onclick = this.share;
-        }
+const template = document.querySelector("#results-screen");
 
-        share() {
-            // Create a link to our game
-            const link = playpass.createLink();
+template.querySelector("button[name=share]").onclick = share;
+template.onActive = async () => {
+    if (state.rolledDice.length === 0) {
+        showScreen("#game-screen");
+        return;
+    }
 
-            // Share some text along with our link
-            playpass.share({
-                text: `Today's dice ${state.rolledDice.map(roll => DICE_EMOJI[roll]).join(" ")} ${link}`,
-            });
-        }
+    // Set the first results line
+    const points = state.rolledDice.reduce((sum, roll) => sum + (roll + 1), 0);
+    template.querySelector("#resultLine1").textContent = `${state.rolledDice.map(roll => DICE_EMOJI[roll]).join(" + ")} = ${points}`;
 
-        onActive() {
-            if (state.rolledDice.length === 0) {
-                showScreen("landing-page");
-                return;
-            }
+    // Set the second results line
+    let rank;
+    if (points > 16) {
+        rank = "LEGENDARY LUCK!";
+    } else if (points > 14) {
+        rank = "Golden Luck!";
+    } else if (points > 12) {
+        rank = "Favored Luck";
+    } else if (points > 10) {
+        rank = "Average Luck";
+    } else if (points > 8) {
+        rank = "Slightly Unlucky";
+    } else if (points > 6) {
+        rank = "Luckless";
+    } else if (points > 4) {
+        rank = "Unfavored Luck";
+    } else if (points > 2) {
+        rank = "Disastrous Luck!";
+    } else {
+        rank = "CURSED!";
+    }
+    template.querySelector("#resultLine2").textContent = rank;
 
-            // Set the first results line
-            const points = state.rolledDice.reduce((sum, roll) => sum + (roll + 1), 0);
-            this.querySelector("#resultLine1").textContent = `${state.rolledDice.map(roll => DICE_EMOJI[roll]).join(" + ")} = ${points}`;
+    const nextGameAt = timer.getNextGameTime();
+    timerUpdate = setInterval(() => {
+        const until = timer.getUntil(nextGameAt);
+        template.querySelector("#timeLeft").textContent = `${until.hours}h ${until.minutes}m ${until.seconds}s until next roll`;
+    }, 1000);
+}
 
-            // Set the second results line
-            let rank;
-            if (points > 16) {
-                rank = "LEGENDARY LUCK!";
-            } else if (points > 14) {
-                rank = "Golden Luck!";
-            } else if (points > 12) {
-                rank = "Favored Luck";
-            } else if (points > 10) {
-                rank = "Average Luck";
-            } else if (points > 8) {
-                rank = "Slightly Unlucky";
-            } else if (points > 6) {
-                rank = "Luckless";
-            } else if (points > 4) {
-                rank = "Unfavored Luck";
-            } else if (points > 2) {
-                rank = "Disastrous Luck!";
-            } else {
-                rank = "CURSED!";
-            }
-            this.querySelector("#resultLine2").textContent = rank;
-
-            const nextGameAt = timer.getNextGameTime();
-            this.timerUpdate = setInterval(() => {
-                const until = timer.getUntil(nextGameAt);
-                this.querySelector("#timeLeft").textContent = `${until.hours}h ${until.minutes}m ${until.seconds}s until next roll`;
-            }, 1000);
-        }
-
-        onInactive() {
-            if (this.timerUpdate) {
-                clearInterval(this.timerUpdate);
-            }
-        }
-    },
-);
+template.onInactive = () => {
+    if (timerUpdate) {
+        clearInterval(timerUpdate);
+    }
+};

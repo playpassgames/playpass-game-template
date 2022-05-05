@@ -5,6 +5,11 @@ template.innerHTML = `
             display: none;
         }
 
+        :host {
+            display: block;
+            flex: 1;
+        }
+
         :host(:not([loading])) ::slotted(*[active]) {
             display: block;
         }
@@ -14,7 +19,7 @@ template.innerHTML = `
         }
     </style>
     <slot name="load-spinner"></slot>
-    <slot></slot>
+    <slot name="screen"></slot>
 `;
 
 const routerTagName = "screen-router";
@@ -38,7 +43,9 @@ window.customElements.define(
                 const prev = this.querySelector(oldValue);
                 if (prev) {
                     prev.removeAttribute("active");
-                    prev.onInactive();
+                    if (typeof prev.onInactive == 'function') {
+                        prev.onInactive();
+                    }
                 }
                 
                 const next = this.querySelector(newValue);
@@ -46,10 +53,11 @@ window.customElements.define(
 
                 this.setAttribute("loading", "");
                 next.setAttribute("loading", "");
-                await next.onActive()
+                if (typeof next.onActive == 'function') {
+                    await next.onActive();
+                }
                 this.removeAttribute("loading");
                 next.removeAttribute("loading");
-                
             }
         }
     }
@@ -57,18 +65,4 @@ window.customElements.define(
 
 export function showScreen(name) {
     document.querySelector(routerTagName).setAttribute("open", name);
-}
-
-export class Screen extends HTMLElement {
-    constructor() {
-        super();
-    }
-
-    onActive() {
-
-    }
-
-    onInactive() {
-
-    }
 }
