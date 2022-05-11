@@ -7,6 +7,13 @@ template.innerHTML = `
         margin-bottom: 20px;
         border-bottom: 1px solid var(--text-muted);
         padding: 12px 0;
+        background: var(--background-body);
+    }
+
+    :host([sticky]) {
+        position: -webkit-sticky;
+        position: sticky;
+        top: 0px;
     }
 
     :host .brand {

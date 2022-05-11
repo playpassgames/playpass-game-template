@@ -6,12 +6,14 @@ template.innerHTML = `
         }
 
         :host {
-            display: block;
+            display: flex;
             flex: 1;
         }
 
         :host(:not([loading])) ::slotted(*[active]) {
             display: block;
+            flex: 1;
+            max-width: 100%;
         }
 
         :host([loading]) ::slotted([slot="load-spinner"]) {
