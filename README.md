@@ -4,6 +4,8 @@ This is an example of how to use the Playpass SDK to build a simple daily level 
 
 Preview: https://base--template.playpass.games
 
+![daily-level-screen](https://user-images.githubusercontent.com/82400122/168182863-54c20707-fcee-48f2-8e8a-fe68d1636de3.png)
+
 ## Setup
 
 Clone this template by running:
